@@ -72,7 +72,6 @@ export interface SEO {
 // Main Article interface
 export interface Article {
   id: number;
-  documentId: string;
   Title: string;
   Slug: string;
   Content: string;

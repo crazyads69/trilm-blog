@@ -1,23 +1,5 @@
-import {
-  SiteSetting,
-  SiteSettingResponse,
-} from "@/interface/site-setting.interface";
+import { SiteSettingResponse } from "@/interface/site-setting.interface";
 import { fetchAPI } from "@/util/strapi.util";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
-import Image from "next/image";
-import { MoonIcon, SunIcon, Menu, SearchIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Header from "@/components/base/header/Header";
-import Footer from "@/components/base/footer/Footer";
 
 export default async function RootPage() {
   // Redirect to your default locale

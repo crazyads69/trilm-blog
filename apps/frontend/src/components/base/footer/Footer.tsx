@@ -1,7 +1,7 @@
 import { SiteSettingResponse } from "@/interface/site-setting.interface";
 import { fetchAPI } from "@/util/strapi.util";
 import Link from "next/link";
-import { Github, Twitter, Linkedin, Mail, Facebook } from "lucide-react";
+import { Github, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
