@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_components_footers",
+  "info": {
+    "displayName": "Footer"
+  },
+  "options": {},
+  "attributes": {
+    "CopyrightText": {
+      "type": "string",
+      "required": true
+    },
+    "FooterColumns": {
+      "displayName": "FooterColumn",
+      "type": "component",
+      "repeatable": true,
+      "component": "components.footer-column"
+    }
+  }
+}

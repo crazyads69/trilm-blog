@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_components_main_menus",
+  "info": {
+    "displayName": "MainMenu"
+  },
+  "options": {},
+  "attributes": {
+    "MenuItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.menu-item",
+      "required": true
+    }
+  }
+}
