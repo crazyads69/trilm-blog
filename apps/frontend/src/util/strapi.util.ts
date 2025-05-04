@@ -1,4 +1,6 @@
+import { ca } from "date-fns/locale";
 import qs from "qs";
+import { cache } from "react";
 
 export function getStrapiURL(path = "") {
   return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"}${path}`;
@@ -14,7 +16,9 @@ export async function fetchAPI<T>(
   path: string,
   urlParamsObject = {},
   locale = "vi",
-  options = {}
+  options: RequestInit = {
+    cache: "no-store" as RequestCache,
+  }
 ): Promise<T> {
   const mergedParams = {
     ...urlParamsObject,
