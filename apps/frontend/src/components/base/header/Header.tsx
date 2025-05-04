@@ -8,9 +8,10 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-import { Menu, SearchIcon } from "lucide-react";
+import { Menu, SearchIcon, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 // Fetch function for server component
 async function getMenuItems() {
@@ -38,54 +39,92 @@ export default async function Header() {
   const menuItems = await getMenuItems();
 
   return (
-    <header className="w-full border-b bg-background/95 backdrop-blur supports-backdrop-blur:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-blur:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between py-4">
+        {/* Logo section */}
         <div className="flex-1 flex justify-start">
-          <div className="flex items-center gap-2 flex-shrink-0 group">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <Link
               href="/"
-              className="flex items-center pointer-events-auto"
-              passHref
+              className="flex items-center group"
+              aria-label="Go to homepage"
             >
-              <div className="cursor-pointer">
+              <div className="overflow-hidden rounded-sm">
                 <Image
                   src="/logo.svg"
                   alt="trilm's space logo"
                   width={150}
                   height={80}
                   priority
-                  className="transition-all duration-300 ease-in-out transform group-hover:scale-105 h-auto"
+                  className="transition-all duration-500 ease-out transform group-hover:scale-110 h-auto"
                 />
               </div>
             </Link>
           </div>
         </div>
         <div className="flex-1 flex justify-center">
-          <NavigationMenu>
-            <NavigationMenuList className="hidden md:flex">
+          <NavigationMenu className="relative">
+            <NavigationMenuList className="hidden md:flex gap-1 rounded-full border px-2 py-1 shadow-sm bg-background">
               {menuItems.map((item) => (
                 <NavigationMenuItem key={item.id}>
                   <NavigationMenuLink
                     href={item.URL}
                     target={item.OpenInNewTab ? "_blank" : "_self"}
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    className={cn(
+                      "group inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-medium",
+                      "transition-colors hover:bg-primary hover:text-primary-foreground",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                      "data-[active]:bg-primary/90 data-[active]:text-primary-foreground",
+                      "disabled:pointer-events-none disabled:opacity-50"
+                    )}
                   >
                     {item.Label}
+                    {item.OpenInNewTab && (
+                      <ExternalLink className="ml-1 h-3 w-3 opacity-70" />
+                    )}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
-            <NavigationMenuViewport />
+            <NavigationMenuViewport className="origin-top-center relative mt-2" />
           </NavigationMenu>
         </div>
-        <div className="flex-1 flex justify-end items-center gap-4">
-          <Button variant="ghost" size="icon" className="rounded-full">
+        <div className="flex-1 flex justify-end items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full hover:bg-primary/10 transition-colors"
+            aria-label="Search"
+          >
             <SearchIcon className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="md:hidden">
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden rounded-full border-primary/20 bg-background/80 backdrop-blur-sm hover:bg-primary/10 hover:text-primary transition-colors"
+            aria-label="Toggle menu"
+          >
             <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle menu</span>
           </Button>
+        </div>
+      </div>
+      <div className="md:hidden h-0 overflow-hidden">
+        <div className="container mx-auto py-4 px-6">
+          <nav className="flex flex-col space-y-4">
+            {menuItems.map((item) => (
+              <Link
+                key={item.id}
+                href={item.URL}
+                target={item.OpenInNewTab ? "_blank" : "_self"}
+                className="flex items-center justify-between py-2 border-b border-border/20 text-sm font-medium hover:text-primary transition-colors"
+              >
+                {item.Label}
+                {item.OpenInNewTab && (
+                  <ExternalLink className="h-3 w-3 opacity-70" />
+                )}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </header>

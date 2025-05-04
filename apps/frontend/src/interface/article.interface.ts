@@ -1,5 +1,3 @@
-import { Avatar } from "@/components/ui/avatar";
-import { OpenGraphImage } from "./site-setting.interface";
 // Image format interface
 export interface ImageFormat {
   name: string;
@@ -95,7 +93,7 @@ export interface Article {
 // Single article response wrapper
 export interface ArticleResponse {
   data: Article;
-  meta: Record<string, any>;
+  meta: Record<string, unknown>;
 }
 
 // Article collection response

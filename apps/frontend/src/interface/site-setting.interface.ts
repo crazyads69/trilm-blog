@@ -64,5 +64,5 @@ export interface SiteSetting {
 
 export interface SiteSettingResponse {
   data: SiteSetting;
-  meta: Record<string, any>;
+  meta: Record<string, unknown>;
 }

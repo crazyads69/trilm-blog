@@ -1,8 +1,8 @@
 import { ArticlesResponse } from "@/interface/article.interface";
 import { fetchAPI } from "@/util/strapi.util";
-import LatestCardPost from "./LatestCardPost";
-import WelcomeBlog from "./WelcomeBlog";
-import CardPost from "./CardPost";
+import LatestCardPost from "./components/LatestCardPost";
+import WelcomeBlog from "./components/WelcomeBlog";
+import CardPost from "./components/CardPost";
 
 async function getLatestArticles() {
   try {
@@ -64,8 +64,12 @@ export default async function RootPage() {
           />
         </div>
       ) : (
-        <div className="w-full flex items-center justify-center">
-          <h1 className="text-2xl font-bold">No articles found</h1>
+        <div className="flex flex-col items-center justify-center py-20 space-y-4 text-center">
+          <h2 className="text-2xl font-bold">No articles yet</h2>
+          <p className="text-muted-foreground max-w-md">
+            Check back soon for new post. I&apos;m working on some interesting
+            topics to share with you.
+          </p>
         </div>
       )}
     </main>

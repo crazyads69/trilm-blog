@@ -18,5 +18,5 @@ export interface StrapiSingleResponse<T> {
     id: number;
     attributes: T;
   };
-  meta: {};
+  meta: object;
 }
