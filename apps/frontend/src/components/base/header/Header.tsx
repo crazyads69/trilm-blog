@@ -8,10 +8,11 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-import { Menu, SearchIcon, ExternalLink } from "lucide-react";
+import { SearchIcon, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import HeaderMobile from "./HeaderMobile";
 
 // Fetch function for server component
 async function getMenuItems() {
@@ -98,33 +99,7 @@ export default async function Header() {
           >
             <SearchIcon className="h-5 w-5" />
           </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="md:hidden rounded-full border-primary/20 bg-background/80 backdrop-blur-sm hover:bg-primary/10 hover:text-primary transition-colors"
-            aria-label="Toggle menu"
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
-      </div>
-      <div className="md:hidden h-0 overflow-hidden">
-        <div className="container mx-auto py-4 px-6">
-          <nav className="flex flex-col space-y-4">
-            {menuItems.map((item) => (
-              <Link
-                key={item.id}
-                href={item.URL}
-                target={item.OpenInNewTab ? "_blank" : "_self"}
-                className="flex items-center justify-between py-2 border-b border-border/20 text-sm font-medium hover:text-primary transition-colors"
-              >
-                {item.Label}
-                {item.OpenInNewTab && (
-                  <ExternalLink className="h-3 w-3 opacity-70" />
-                )}
-              </Link>
-            ))}
-          </nav>
+          <HeaderMobile menuItems={menuItems} />
         </div>
       </div>
     </header>
